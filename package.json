@@ -1,0 +1,68 @@
+{
+  "name": "auth-server",
+  "version": "1.0.0",
+  "main": "build/api/index.js",
+  "repository": "https://github.com/kecoco16/auth-server",
+  "author": "kecoco16",
+  "private": true,
+  "scripts": {
+    "start": "NODE_ENV=production node build/api/index.js",
+    "build": "babel src -d build",
+    "test": "echo \"Error: no test available\" && exit 1",
+    "lint": "eslint . --ext .js",
+    "lint:fix": "eslint --fix . --ext .js",
+    "db:setup": "babel-node src/db/setup.js",
+    "db:seeds": "babel-node src/db/seeds",
+    "db:examples": "babel-node src/db/examples",
+    "postinstall": "npm run build"
+  },
+  "dependencies": {
+    "@babel/runtime": "^7.4.5",
+    "chalk": "^2.4.2",
+    "express": "^4.17.1",
+    "express-jwt": "^5.3.1",
+    "inquirer": "^6.3.1",
+    "joi": "^14.3.1",
+    "jsonwebtoken": "^8.5.1",
+    "pg": "^7.11.0",
+    "pg-hstore": "^2.3.3",
+    "sequelize": "^5.8.7"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.4.4",
+    "@babel/core": "^7.4.5",
+    "@babel/node": "^7.4.5",
+    "@babel/plugin-transform-runtime": "^7.4.4",
+    "@babel/preset-env": "^7.4.5",
+    "eslint": "^5.16.0",
+    "eslint-config-prettier": "^4.3.0",
+    "eslint-plugin-prettier": "^3.1.0",
+    "husky": "^2.4.0",
+    "lint-staged": "^8.2.0",
+    "nodemon": "^1.19.1",
+    "prettier": "^1.18.2"
+  },
+  "engines": {
+    "node": "10.15.0",
+    "npm": "6.4.1"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.js": [
+      "eslint --fix",
+      "git add"
+    ],
+    "*.json": [
+      "prettier --write",
+      "git add"
+    ],
+    "*.md": [
+      "prettier --write",
+      "git add"
+    ]
+  }
+}
